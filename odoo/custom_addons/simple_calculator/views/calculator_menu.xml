@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main Menu -->
+    <menuitem id="menu_simple_calculator_root"
+              name="Simple Calculator"
+              sequence="100"/>
+
+    <!-- Calculator Menu -->
+    <menuitem id="menu_simple_calculator"
+              name="Calculator"
+              parent="menu_simple_calculator_root"
+              action="action_simple_calculator"
+              sequence="10"/>
+</odoo>

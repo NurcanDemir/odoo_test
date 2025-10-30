@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Calculator Form View -->
+    <record id="view_simple_calculator_form" model="ir.ui.view">
+        <field name="name">simple.calculator.form</field>
+        <field name="model">simple.calculator</field>
+        <field name="arch" type="xml">
+            <form string="Simple Calculator">
+                <sheet>
+                    <!-- Calculator Section -->
+                    <group string="Calculator">
+                        <group>
+                            <field name="num1" string="First Number"/>
+                            <field name="num2" string="Second Number"/>
+                        </group>
+                        <group>
+                            <field name="result" string="Result" readonly="1"/>
+                            <field name="operation_text" string="Operation" readonly="1"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Operation Buttons -->
+                    <div class="row">
+                        <div class="col-3">
+                            <button name="button_add" string="+" type="object" class="btn btn-success btn-lg"/>
+                        </div>
+                        <div class="col-3">
+                            <button name="button_subtract" string="−" type="object" class="btn btn-info btn-lg"/>
+                        </div>
+                        <div class="col-3">
+                            <button name="button_multiply" string="×" type="object" class="btn btn-warning btn-lg"/>
+                        </div>
+                        <div class="col-3">
+                            <button name="button_divide" string="÷" type="object" class="btn btn-danger btn-lg"/>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <button name="button_clear" string="Clear All" type="object" class="btn btn-secondary"/>
+                        </div>
+                    </div>
+                    
+                    <!-- Currency Rates -->
+                    <group string="Currency Rates">
+                        <field name="usd_rate" string="USD/TRY" readonly="1"/>
+                        <field name="eur_rate" string="EUR/TRY" readonly="1"/>
+                        <field name="gbp_rate" string="GBP/TRY" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Calculator Action -->
+    <record id="action_simple_calculator" model="ir.actions.act_window">
+        <field name="name">Simple Calculator</field>
+        <field name="res_model">simple.calculator</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="view_id" ref="view_simple_calculator_form"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new calculation
+            </p>
+            <p>
+                Use this simple calculator for basic mathematical operations.
+            </p>
+        </field>
+    </record>
+</odoo>
