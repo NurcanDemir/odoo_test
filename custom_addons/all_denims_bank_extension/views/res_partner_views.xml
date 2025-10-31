@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree view for bank accounts (used inline / list) -->
+    <record id="view_res_partner_bank_tree_all_denims" model="ir.ui.view">
+        <field name="name">res.partner.bank.tree.all.denims</field>
+        <field name="model">res.partner.bank</field>
+        <field name="arch" type="xml">
+            <tree string="Bank Accounts">
+                <field name="iban"/>
+                <field name="bank_id"/>
+                <field name="branch_name"/>
+                <field name="branch_code"/>
+                <field name="swift"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view for bank account popup (no send_money field, extra fields after acc_number) -->
+    <record id="view_res_partner_bank_form_all_denims" model="ir.ui.view">
+        <field name="name">res.partner.bank.form.all.denims</field>
+        <field name="model">res.partner.bank</field>
+        <field name="arch" type="xml">
+            <form string="Bank Account">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="acc_number"/>
+                            <field name="iban"/>
+                        </group>
+                        <group>
+                            <field name="bank_id"/>
+                            <field name="branch_name"/>
+                            <field name="branch_code"/>
+                            <field name="swift"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Inherit partner form to replace inline bank_ids tree (inside Faturalama tab Bank Accounts) -->
+    <record id="view_partner_inherit_bank_tree_all_denims" model="ir.ui.view">
+        <field name="name">res.partner.form.bank.tree.all.denims</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="contacts.view_partner_form"/>
+        <field name="arch" type="xml">
+            <!-- Replace the inline bank_ids field with a customized tree -->
+            <xpath expr="//field[@name='bank_ids']" position="replace">
+                <field name="bank_ids" nolabel="1">
+                    <tree string="Banka Hesapları">
+                        <field name="iban"/>
+                        <field name="bank_id"/>
+                        <field name="branch_name"/>
+                        <field name="branch_code"/>
+                        <field name="swift"/>
+                    </tree>
+                </field>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
