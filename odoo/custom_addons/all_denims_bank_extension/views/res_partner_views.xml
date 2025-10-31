@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- Modify partner form: replace bank_ids tree inside the 'Faturalama' tab -->
+    <record id="view_partner_form_bank_extension" model="ir.ui.view">
+      <field name="name">res.partner.form.bank.extension</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="contacts.view_partner_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//page[@string='Faturalama']//field[@name='bank_ids']" position="replace">
+          <field name="bank_ids" context="{'default_partner_id': active_id}">
+            <tree editable="bottom">
+              <field name="iban"/>
+              <field name="bank_id"/>
+              <field name="branch_name"/>
+              <field name="branch_code"/>
+              <field name="swift"/>
+            </tree>
+          </field>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- Modify res.partner.bank form: add new fields after acc_number and hide send_money -->
+    <record id="view_partner_bank_form_extension" model="ir.ui.view">
+      <field name="name">res.partner.bank.form.extension</field>
+      <field name="model">res.partner.bank</field>
+      <field name="inherit_id" ref="base.view_partner_bank_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='acc_number']" position="after">
+          <field name="iban"/>
+          <field name="branch_name"/>
+          <field name="branch_code"/>
+          <field name="swift"/>
+        </xpath>
+        <!-- hide the send_money toggle if present -->
+        <xpath expr="//field[@name='send_money']" position="attributes">
+          <attribute name="modifiers">{&apos;invisible&apos;: True}</attribute>
+        </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>
